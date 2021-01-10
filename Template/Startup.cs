@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Template.Data.Context;
+using Template.IoC;
 
 namespace Template
 {
@@ -28,6 +29,7 @@ namespace Template
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TemplateContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TemplateDB")).EnableSensitiveDataLogging());
+            NativeInjector.RegisterServices(services);
             services.AddControllers();
         }
 
