@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Template.Application.Interfaces;
@@ -11,35 +12,22 @@ namespace Template.Application.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepository;
+        private readonly IMapper mapper;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             this.userRepository = userRepository;
+            this.mapper = mapper;
         }
 
         public List<UserViewModel> Get()
         {
-            var _userViewModels = new List<UserViewModel>();
-            var _users = this.userRepository.GetAll();
-
-            foreach (var item in _users)
-            {
-                _userViewModels.Add(new UserViewModel { Id = item.Id, Email = item.Email, Name = item.Name });
-            }
-
-            return _userViewModels;
+            return mapper.Map<List<UserViewModel>>(this.userRepository.GetAll());
         }
 
         public bool Post(UserViewModel userViewModel)
         {
-            var _user = new User
-            {
-                Id = Guid.NewGuid(),
-                Email = userViewModel.Email,
-                Name = userViewModel.Name
-            };
-
-            this.userRepository.Create(_user);
+            this.userRepository.Create(mapper.Map<User>(userViewModel));
 
             return true;
         }

@@ -23,10 +23,9 @@ namespace Template.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            
             return Ok(this.userService.Get());
         }
-        
+
         [HttpPost]
         public IActionResult Post(UserViewModel userViewModel)
         {
