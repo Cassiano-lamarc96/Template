@@ -24,10 +24,24 @@ namespace Template.Application.Services
 
             foreach (var item in _users)
             {
-                _userViewModels.Add(new UserViewModel { Id = item.Id, Email = item.Email, Nome = item.Name });
-            } 
+                _userViewModels.Add(new UserViewModel { Id = item.Id, Email = item.Email, Name = item.Name });
+            }
 
             return _userViewModels;
+        }
+
+        public bool Post(UserViewModel userViewModel)
+        {
+            var _user = new User
+            {
+                Id = Guid.NewGuid(),
+                Email = userViewModel.Email,
+                Name = userViewModel.Name
+            };
+
+            this.userRepository.Create(_user);
+
+            return true;
         }
     }
 }

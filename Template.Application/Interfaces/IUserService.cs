@@ -8,5 +8,6 @@ namespace Template.Application.Interfaces
     public interface IUserService
     {
         List<UserViewModel> Get();
+        public bool Post(UserViewModel userViewModel);
     }
 }
