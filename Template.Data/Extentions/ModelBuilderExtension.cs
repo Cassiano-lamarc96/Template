@@ -12,7 +12,7 @@ namespace Template.Data.Extentions
         {
             builder.Entity<User>()
                 .HasData(
-                    new User { Id = Guid.Parse("c7dce21b-d207-4869-bf5f-08eb13866919"), Name = "User Default", Email = "userdefault@template.com"}
+                    new User { Id = Guid.Parse("c7dce21b-d207-4869-bf5f-08eb13866919"), Name = "User Default", Email = "userdefault@template.com", DateCreated = new DateTime(2020, 2, 3), IsDeleted = false }
                 );
 
             return builder;
