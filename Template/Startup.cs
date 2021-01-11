@@ -1,20 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Template.Application.AutoMapper;
 using Template.Data.Context;
 using Template.IoC;
+using Template.Swagger;
 
 namespace Template
 {
@@ -33,6 +27,7 @@ namespace Template
             services.AddDbContext<TemplateContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TemplateDB")).EnableSensitiveDataLogging());
             NativeInjector.RegisterServices(services);
             services.AddAutoMapper(typeof(AutoMapperSetup));
+            services.AddSwaggerConfiguration();
             services.AddControllers();
         }
 
@@ -43,6 +38,8 @@ namespace Template
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwaggerConfiguration();
 
             app.UseHttpsRedirection();
 
