@@ -190,7 +190,6 @@ namespace Template.Data.Repositories
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
