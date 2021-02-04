@@ -11,6 +11,6 @@ namespace Template.Application.Interfaces
         public bool Post(UserViewModel userViewModel);
         UserViewModel GetById(string id);
         bool Put(UserViewModel userViewModel);
-        bool Delete(string id)
+        bool Delete(string id);
     }
 }
